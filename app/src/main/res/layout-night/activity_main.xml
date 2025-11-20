@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#121212">
+
+
+
+    <ImageView
+        android:id="@+id/mqttStatusIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/wifioff"
+        android:contentDescription="Status da Conexão MQTT"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="215dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="Logo"
+        android:src="@drawable/dark_ejb_logo"
+        app:srcCompat="@drawable/dark_ejb_logo" />
+
+    <EditText
+        android:id="@+id/msgInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite a mensagem"
+        android:textColor="#333333"
+        android:textColorHint="#AAAAAA"
+        android:background="@android:drawable/edit_text"
+        android:padding="16dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnPublish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:background="#333333"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnVoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎤 Falar"
+        android:textColor="#FFFFFF"
+        android:background="#333333"
+        android:layout_marginTop="28dp"/>
+    <!-- Campo de log de mensagens -->
+    <TextView
+        android:id="@+id/messagesLog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#121212"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:scrollbars="vertical"
+        android:overScrollMode="always"
+        android:text=""/>
+</LinearLayout>
