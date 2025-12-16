@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var speechIntent: Intent
     private lateinit var mqttStatusIcon: ImageView
-
+    private val SCREEN_TIMEOUT_MS = 10 * 60 * 1000L // 10 minutos
     private val RECORD_REQUEST = 40
     private val TOPIC = "mensagens"   //  TÓPICO FIXO
 
@@ -37,6 +37,23 @@ class MainActivity : AppCompatActivity() {
         .serverPort(8883)
         .sslWithDefaultConfig()
         .buildAsync()
+
+
+    // Tempo de tela ocioso
+    private val screenHandler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val allowScreenLockRunnable = Runnable {
+        window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        println("🔒 Tela liberada para bloqueio após 10 minutos")
+    }
+    private fun keepScreenOnForSomeTime() {
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        println("🔓 Tela mantida ligada por 10 minutos")
+
+        screenHandler.removeCallbacks(allowScreenLockRunnable)
+        screenHandler.postDelayed(allowScreenLockRunnable, SCREEN_TIMEOUT_MS)
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +67,16 @@ class MainActivity : AppCompatActivity() {
          connectMqtt()
 
 
+        binding.btnVoice.setOnClickListener {
+            keepScreenOnForSomeTime()
+            startListening()
+        }
+
         binding.btnPublish.setOnClickListener {
+            keepScreenOnForSomeTime()
             publishMessage()
         }
-        binding.btnVoice.setOnClickListener { startListening() }
+
 
         binding.messagesLog.movementMethod = android.text.method.ScrollingMovementMethod()
 
@@ -196,18 +219,31 @@ class MainActivity : AppCompatActivity() {
         binding.msgInput.text.clear()
     }
 
-    private fun addMessageToLog(message: String) {
-        runOnUiThread {
-            val log = binding.messagesLog
-            log.append("\n$message")
+//    private fun addMessageToLog(message: String) {
+//        runOnUiThread {
+//            val log = binding.messagesLog
+//            log.append("\n$message")
+//
+//            // Scroll automático para o final
+//            val scrollAmount = log.layout?.getLineTop(log.lineCount) ?: 0
+//            if (scrollAmount > log.height) {
+//                log.scrollTo(0, scrollAmount - log.height)
+//            }
+//        }
+//    }
+private fun addMessageToLog(message: String) {
+    runOnUiThread {
+        binding.messagesLog.append("\n$message")
 
-            // Scroll automático para o final
-            val scrollAmount = log.layout?.getLineTop(log.lineCount) ?: 0
-            if (scrollAmount > log.height) {
-                log.scrollTo(0, scrollAmount - log.height)
-            }
+        binding.messagesLog.post {
+            binding.messagesScroll.fullScroll(android.view.View.FOCUS_DOWN)
         }
     }
+}
+
+
+
+
 
 
 }

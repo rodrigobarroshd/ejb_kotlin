@@ -13,7 +13,7 @@
         android:id="@+id/mqttStatusIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="2dp"
         android:src="@drawable/wifioff"
         android:contentDescription="Status da Conexão MQTT"/>
 
@@ -22,7 +22,7 @@
         android:id="@+id/logo"
         android:layout_width="215dp"
         android:layout_height="196dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:background="#FFFFFF"
         android:contentDescription="Logo"
         android:cropToPadding="false"
@@ -44,25 +44,27 @@
         android:layout_height="wrap_content"
         android:text="Enviar"
         android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
+    <!-- Campo de log de mensagens -->
     <Button
         android:id="@+id/btnVoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🎤 Falar"
-        android:layout_marginTop="28dp"/>
-    <!-- Campo de log de mensagens -->
-    <TextView
-        android:id="@+id/messagesLog"
+        android:layout_marginTop="18dp"
+        android:text="🎤 Falar" />
+
+    <ScrollView
+        android:id="@+id/messagesScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#EEEEEE"
-        android:padding="12dp"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:scrollbars="vertical"
-        android:overScrollMode="always"
-        android:text=""/>
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/messagesLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+
 </LinearLayout>
