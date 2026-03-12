@@ -1,74 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#121212">
+    android:background="#1A1A1A">
 
-
-    <ImageView
-        android:id="@+id/mqttStatusIcon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="2dp"
-        android:src="@drawable/wifioff"
-        android:contentDescription="Status da Conexão MQTT"/>
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="215dp"
-        android:layout_height="196dp"
-        android:layout_marginBottom="30dp"
-        android:contentDescription="Logo"
-        android:src="@drawable/dark_ejb_logo"
-        app:srcCompat="@drawable/dark_ejb_logo" />
-
-    <EditText
-        android:id="@+id/msgInput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite a mensagem"
-        android:textColor="#333333"
-        android:textColorHint="#AAAAAA"
-        android:background="@android:drawable/edit_text"
-        android:padding="16dp"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#121212"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:elevation="4dp">
 
-    <Button
-        android:id="@+id/btnPublish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enviar"
-        android:textColor="#FFFFFF"
-        android:background="#333333"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp" />
+        <ImageView
+            android:id="@+id/mqttStatusIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/wifioff"
+            android:contentDescription="Status MQTT" />
 
-    <Button
-        android:id="@+id/btnVoice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🎤 Falar"
-        android:textColor="#FFFFFF"
-        android:background="#333333"
-        android:layout_marginTop="18dp"/>
-    <!-- Campo de log de mensagens -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="130dp"
+            android:layout_height="110dp"
+            android:src="@drawable/dark_ejb_logo"
+            android:contentDescription="Logo"
+            app:srcCompat="@drawable/dark_ejb_logo"/>
+
+    </LinearLayout>
 
     <ScrollView
-        android:id="@+id/messagesScroll"
+        android:id="@+id/chatScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false">
 
-        <TextView
-            android:id="@+id/messagesLog"
+        <LinearLayout
+            android:id="@+id/chatContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
     </ScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#121212"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnVoice"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@android:drawable/ic_btn_speak_now"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Falar" />
+
+        <EditText
+            android:id="@+id/msgInput"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:hint="Digite a mensagem"
+            android:textColorHint="#AAAAAA"
+            android:textColor="@color/black"
+            android:background="@android:drawable/edit_text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textSize="15sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"/>
+
+        <Button
+            android:id="@+id/btnPublish"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:text="ENVIAR"
+            android:textSize="13sp"
+            android:backgroundTint="#2E7D32"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 
 </LinearLayout>
