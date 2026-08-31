@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.ejb.kotlin.databinding.ActivityMainBinding
 import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.MqttGlobalPublishFilter
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     private val client = MqttClient.builder()
         .useMqttVersion3()
         .identifier("android-" + UUID.randomUUID().toString())
-        .serverHost("kebnekaise.lmq.cloudamqp.com")
+        .serverHost("jackal.rmq.cloudamqp.com")
         .serverPort(8883)
         .sslWithDefaultConfig()
         .buildAsync()
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
 
         setContentView(binding.root)
+        setupKeyboardInsets()
 
         requestAudioPermission()
         setupSpeechRecognizer()
@@ -110,6 +113,21 @@ class MainActivity : AppCompatActivity() {
                 this, arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_REQUEST
             )
         }
+    }
+
+    private fun setupKeyboardInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val keyboardInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val navigationInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bottomInset = maxOf(keyboardInsets.bottom, navigationInsets.bottom)
+
+            (binding.messageBar.layoutParams as LinearLayout.LayoutParams).apply {
+                bottomMargin = bottomInset
+                binding.messageBar.layoutParams = this
+            }
+            insets
+        }
+        ViewCompat.requestApplyInsets(binding.root)
     }
 
     // ------------------------------ CHAT BUBBLE
@@ -206,8 +224,8 @@ class MainActivity : AppCompatActivity() {
 
     // ------------------------------ MQTT
     private fun connectMqtt() {
-        val username = "xzkmpjmo:xzkmpjmo"
-        val password = "jd0wDw9y8kyuKMkpHOWokeWqm-k1UIep"
+        val username = "civyvrjs:civyvrjs"
+        val password = "e05CV9_n3bUdjTrK8MgSW-Morelqf60d"
 
         client.connectWith()
             .simpleAuth()

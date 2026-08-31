@@ -52,18 +52,19 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/messageBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="64dp"
         android:orientation="horizontal"
         android:background="#121212"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingStart="9dp"
+        android:paddingEnd="9dp"
         android:gravity="center_vertical">
 
         <ImageButton
             android:id="@+id/btnVoice"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:src="@android:drawable/ic_btn_speak_now"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Falar" />
@@ -71,7 +72,7 @@
         <EditText
             android:id="@+id/msgInput"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="51dp"
             android:layout_weight="1"
             android:hint="Digite a mensagem"
             android:textColorHint="#AAAAAA"
@@ -81,16 +82,16 @@
             android:paddingEnd="10dp"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"/>
 
         <Button
             android:id="@+id/btnPublish"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="51dp"
             android:text="ENVIAR"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:backgroundTint="#2E7D32"
             android:textColor="#FFFFFF" />
 
